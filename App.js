@@ -1,12 +1,20 @@
-import { StatusBar } from 'expo-status-bar';
+import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { useFonts } from 'expo-font';
+import AppLoading from 'expo-app-loading';
+import AppNavigator from './navigation/appNavigator';
 
 export default function App() {
+
+  const [loaded] = useFonts({
+    Abel: require('./assets/fonts/Abel-Regular.ttf'),
+    
+  });
+
+  if (!loaded) return <AppLoading />
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <AppNavigator />
   );
 }
 
