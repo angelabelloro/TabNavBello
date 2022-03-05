@@ -5,7 +5,7 @@ import {Entypo} from '@expo/vector-icons';
 
 export default function EventItem({ pressHandler, item, pressDelete }) {
   return (
-    <TouchableOpacity style={styles.itemBox} onPress={() => pressHandler(item.id)}>
+    <TouchableOpacity style={styles.itemBox} onPress={() => pressHandler(item)}>
       <Button title = "x"  onPress={() => pressDelete(item.id)} color={Colors.button}/>
       <Text style={styles.fontItem}>{item.value}</Text>
       <View>

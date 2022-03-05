@@ -15,7 +15,7 @@ import Colors from "../constants/colors";
 import AddEvent from "../components/addEvent";
 import Event from "../components/event";
 
- const StartAppScreen = ({ navigation }) => {
+ const StartAppScreen = ({ navigation, route }) => {
     const [textInput, setTextInput] = useState('');
     const [itemList, setItemList] = useState([]); 
   
@@ -43,8 +43,8 @@ import Event from "../components/event";
       setEventSelected(item)
     }*/
 
-    const handleEventSelected = () => {
-      navigation.navigate('Evento')
+    const handleEventSelected = (item) => {
+      navigation.navigate ('Evento', {name:item.value});
     }
     return (
         <TouchableWithoutFeedback onPress={() => {

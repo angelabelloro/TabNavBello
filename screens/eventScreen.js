@@ -16,7 +16,8 @@ import Colors from '../constants/colors';
 import AddItem from '../components/addItem';
 import EventItem from "../components/eventItem";
 
-const EventScreen = ({ navigation}) => {
+const EventScreen = ({ navigation, route}) => {
+  console.log(route.params);
   const [textInput, setTextInput] = useState('');
   const [itemList, setItemList] = useState([]); 
 
@@ -47,8 +48,8 @@ const EventScreen = ({ navigation}) => {
     })
     console.log('borrado')
   }
-  const handleItemSelected = () => {
-    navigation.navigate('Tarea')
+  const handleItemSelected = (item) => {
+    navigation.navigate('Tarea', {name:item.value})
   }
   return (
       <TouchableWithoutFeedback onPress={() => {

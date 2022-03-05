@@ -5,7 +5,7 @@ import {Entypo} from '@expo/vector-icons';
 
 export default function Event({ pressHandler, item }) {
   return (
-    <TouchableOpacity style={styles.itemBox} onPress={() => pressHandler(item.id)}>
+    <TouchableOpacity style={styles.itemBox} onPress={() => pressHandler(item)}>
       <Text style={styles.fontItem}>{item.value}</Text>
       <Entypo name="chevron-thin-right" size={24} color={Colors.primary} />
     </TouchableOpacity>

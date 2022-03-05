@@ -5,7 +5,7 @@ import Colors from "../constants/colors"
 
 const Stack = createNativeStackNavigator();
 
-const AppNavigator = () => {
+const NotificationNavigator = () => {
     return (
         <Stack.Navigator
         screenOptions={{
@@ -19,9 +19,9 @@ const AppNavigator = () => {
             }
         }}
         >
-            <Stack.Screen name="Planner" component={MainScreen}/>
+            <Stack.Screen name="Upgrades" component={MainScreen}/>
         </Stack.Navigator>
     )
 }
 
-export default AppNavigator;
+export default NotificationNavigator;

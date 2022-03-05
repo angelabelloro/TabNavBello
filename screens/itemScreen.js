@@ -2,8 +2,9 @@ import react, {useState} from "react";
 import {View, Button, Text, TouchableWithoutFeedback, Keyboard, Platform, StyleSheet, KeyboardAvoidingView, Alert} from 'react-native';
 import Colors from "../constants/colors";
 
-const ItemScreen = ({ navigation }) =>{
+const ItemScreen = ({ navigation, route }) =>{
 
+  console.log(route.params);
   return(
     <TouchableWithoutFeedback onPress={() => {
       Keyboard.dismiss()
