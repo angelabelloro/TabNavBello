@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import { 
   View,
   Text,
-  Button,
   FlatList,
   TouchableWithoutFeedback,
   Keyboard,
@@ -15,11 +14,17 @@ import {
 import Colors from '../constants/colors';
 import AddItem from '../components/addItem';
 import EventItem from "../components/eventItem";
+import { useSelector, useDispatch } from 'react-redux';
+import {addItem, removeItem} from '../store/actions/items.actions'
+import { selectEvent} from '../store/actions/events.actions';
+
 
 const EventScreen = ({ navigation, route}) => {
   console.log(route.params);
+  const dispatch = useDispatch();
+ 
   const [textInput, setTextInput] = useState('');
-  const [itemList, setItemList] = useState([]); 
+  const itemList = useSelector(state => state.items.itemList);
 
   const handleChangeText = (text) => {
     setTextInput(text)
@@ -28,13 +33,12 @@ const EventScreen = ({ navigation, route}) => {
   const handleOnPress = () => {
     if(textInput.length>2){
     setTextInput('')
-    setItemList([
-      ...itemList,
+    dispatch(addItem(
       {
         value: textInput, 
         id: Math.random().toString(),
-      },
-    ])
+      }
+    ));
   } else{
       Alert.alert('Ops,', 'debes ingresar una tarea minimo de 3 letras',[
       {text: 'Ok', onPress: () => console.log('cerro alerta de item')}
@@ -43,13 +47,14 @@ const EventScreen = ({ navigation, route}) => {
 }
   
   const handleItemDelete = (item) =>{
-    setItemList((itemList) =>{
-      return itemList.filter(itemList=> itemList.id !== item)
-    })
+    dispatch(removeItem(item));
     console.log('borrado')
   }
   const handleItemSelected = (item) => {
-    navigation.navigate('Tarea', {name:item.value})
+    dispatch(selectEvent(item.id));
+    navigation.navigate('Tarea', {
+      name: item.value,
+    });
   }
   return (
       <TouchableWithoutFeedback onPress={() => {
@@ -60,6 +65,7 @@ const EventScreen = ({ navigation, route}) => {
           keyboardVerticalOffset={30}
           style={styles.screen}
     >
+      <React.Fragment>
     <View style={styles.container}>
     <View>
       <Text style={styles.subtitle}>Por favor ingresa la actividad o el objeto que hace parte de tu evento</Text>
@@ -79,10 +85,9 @@ const EventScreen = ({ navigation, route}) => {
         numColumns={2}
         keyExtractor={item => item.id}
       /> 
-      <View>
-        <Button title = "VOLVER" onPress={() => navigation.navigate('Home')} color={Colors.button}/>
-      </View>
+
   </View>
+  </React.Fragment>
  
        </KeyboardAvoidingView>
     </TouchableWithoutFeedback>

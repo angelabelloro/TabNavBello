@@ -19,10 +19,7 @@ const ItemScreen = ({ navigation, route }) =>{
       </View>
        <View>
             <Text style={styles.subtitle}>Screen en construcción</Text>
-            <View>
-        <Button title = "VOLVER" onPress={() => navigation.navigate('Evento')} color={Colors.button}/>
-      </View>
-        </View>
+       </View>
       </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
   )

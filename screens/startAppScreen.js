@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import { 
     View,
     Text,
-    Button,
     FlatList,
     TouchableWithoutFeedback,
     Keyboard,
@@ -12,13 +11,18 @@ import {
     Alert,
  } from "react-native";
 import Colors from "../constants/colors";
-import AddEvent from "../components/addEvent";
+
 import Event from "../components/event";
+import AddItem from "../components/addItem";
+import { useSelector, useDispatch } from 'react-redux';
+import { addEvent, selectEvent} from '../store/actions/events.actions';
 
  const StartAppScreen = ({ navigation, route }) => {
+
     const [textInput, setTextInput] = useState('');
-    const [itemList, setItemList] = useState([]); 
-  
+    const dispatch = useDispatch();
+    const eventList = useSelector(state => state.events.eventList);
+
     const handleChangeText = (text) => {
       setTextInput(text)
     }
@@ -26,13 +30,12 @@ import Event from "../components/event";
     const handleOnPress = () => {
       if (textInput.length>2){
       setTextInput('')
-      setItemList([
-        ...itemList,
+      dispatch(addEvent(
         {
-          value: textInput,
+          value: textInput, 
           id: Math.random().toString(),
-        },
-      ])
+        }
+      ));
     } else{
       Alert.alert('Ops,', 'debes ingresar un nombre con un minimo de 3 letras',[
         {text: 'Ok', onPress: () => console.log('cerro alerta de evento')}
@@ -44,7 +47,9 @@ import Event from "../components/event";
     }*/
 
     const handleEventSelected = (item) => {
-      navigation.navigate ('Evento', {name:item.value});
+      dispatch(selectEvent(item.id));
+      navigation.navigate ('Evento', {
+        name:item.value});
     }
     return (
         <TouchableWithoutFeedback onPress={() => {
@@ -55,17 +60,18 @@ import Event from "../components/event";
             keyboardVerticalOffset={30}
             style={styles.screen}
       >
+        <React.Fragment>
       <View style={styles.container}>
       <View>
         <Text style={styles.subtitle}>Por favor ingresa el nombre de tu ocasión o evento</Text>
       </View>
-      <AddEvent
+      <AddItem
         textInput={textInput}
         handleOnPress={handleOnPress}
         handleChangeText={handleChangeText}
         />
         <FlatList
-          data={itemList}
+          data={eventList}
           renderItem={({ item }) => (
             <Event item={item} pressHandler={handleEventSelected} />
           )
@@ -74,6 +80,7 @@ import Event from "../components/event";
           keyExtractor={item => item.id}
         />
     </View>
+    </React.Fragment>
          </KeyboardAvoidingView>
       </TouchableWithoutFeedback>
     );

@@ -1,11 +1,14 @@
 import React from "react";
-import { StyleSheet, TouchableOpacity, Text, View } from "react-native";
+import { StyleSheet, TouchableOpacity, Text } from "react-native";
 import Colors from '../constants/colors'
 import {Entypo} from '@expo/vector-icons';
 
 export default function Event({ pressHandler, item }) {
   return (
-    <TouchableOpacity style={styles.itemBox} onPress={() => pressHandler(item)}>
+    <TouchableOpacity 
+      style={styles.itemBox} 
+      onPress={() => pressHandler(item)}
+      >
       <Text style={styles.fontItem}>{item.value}</Text>
       <Entypo name="chevron-thin-right" size={24} color={Colors.primary} />
     </TouchableOpacity>

@@ -26,7 +26,10 @@ const ROUTES = {
                 }
             }}
         >
-            <Stack.Screen name={ROUTES.HOME} options={{ title: 'PLANEADOR DE EVENTOS'}} component={StartAppScreen} />
+            <Stack.Screen 
+            name={ROUTES.HOME} 
+            options={{ title: 'PLANEADOR DE EVENTOS'}} component={StartAppScreen}
+             />
             <Stack.Screen 
             name='Evento' 
             component={EventScreen} 
