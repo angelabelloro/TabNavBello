@@ -2,6 +2,7 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import StartAppScreen from '../screens/startAppScreen';
 import EventScreen from '../screens/eventScreen';
+import ItemDetailsScreen from '../screens/itemDetailsScreen';
 import ItemScreen from '../screens/itemScreen';
 import Colors from '../constants/colors';
 import { Platform } from 'react-native';
@@ -31,19 +32,23 @@ const ROUTES = {
             options={{ title: 'PLANEADOR DE EVENTOS'}} component={StartAppScreen}
              />
             <Stack.Screen 
-            name='Evento' 
-            component={EventScreen} 
-            options={({ route }) => ({
-                title:route.params.name,
+                name='Evento' 
+                component={EventScreen} 
+                options={({ route }) => ({
+                    title:route.params.name,
             })}
             
             />
             <Stack.Screen name='Tarea' 
-            component={ItemScreen} 
-            options={({ route }) => ({
-                title:route.params.name,
+                component={ItemDetailsScreen} 
+                options={({ route }) => ({
+                    title:route.params.name,
             })}
             />
+            <Stack.Screen name="Map"
+            component={ItemScreen}
+            options={{title: 'Mapa'}} 
+        />
         </Stack.Navigator>
      );
  }
